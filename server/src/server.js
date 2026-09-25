@@ -4,7 +4,24 @@ const dotenv = require("dotenv");
 const { createClient } = require("@supabase/supabase-js");
 const { predictDemand } = require("./prediction");
 
+
 dotenv.config();
+
+for (const name of ["SUPABASE_URL", "SUPABASE_SECRET_KEY"]) {
+  const value = process.env[name] || "";
+  const bad = [];
+
+  for (let i = 0; i < value.length; i++) {
+    if (value.charCodeAt(i) > 127) {
+      bad.push({ index: i, code: value.charCodeAt(i) });
+    }
+  }
+
+  console.log(
+    `[ENV CHECK] ${name}: length=${value.length}, nonASCII=${JSON.stringify(bad)}, whitespace=${/\s/.test(value)}`
+  );
+}
+
 
 const app = express();
 
