@@ -28,7 +28,7 @@ import {
 } from "recharts";
 import "./App.css";
 
-const API = "http://localhost:5050";
+const API = "https://foodwise-ai-r4ua.onrender.com";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 25 },
